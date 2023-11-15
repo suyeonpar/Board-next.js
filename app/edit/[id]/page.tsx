@@ -1,10 +1,10 @@
-import db from '@/db'; // 데이터베이스 가져오기
+import db from '@/db';
 import { RowDataPacket } from 'mysql2/promise';
 import Link from 'next/link';
 import { NextRequest, NextResponse } from "next/server";
-import React, { useState } from 'react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 
 interface PostList {
     id: number;
@@ -30,10 +30,10 @@ interface userInfo {
     }
   }
 
-export default async function Edit(props: editProps) {
+export default async function Edit( props: editProps) {
 
-    console.log(props.params.id);
     const [results] = await db.query<RowDataPacket[]>('select * from board.board where id = ?', [props.params.id]);
+    console.log(props.params.id);
     const sessions = await getServerSession(authOptions) as userInfo;
     console.log(sessions)
 
@@ -45,7 +45,6 @@ export default async function Edit(props: editProps) {
             return NextResponse.json({ message: '데이터가 부족합니다.' });
           } else {
             await db.query<RowDataPacket[]>('update board.board set title = ?, content = ? where id = ?', [title, content, id]);
-            //const [datas] = await db.query<RowDataPacket[]>('select * from board.board where id=?', [id]);
             return NextResponse.json({ message: '성공', result: results });
           }
         } catch (error) {
@@ -65,13 +64,13 @@ export default async function Edit(props: editProps) {
                     <form method="post">
                         <div className="flex justify-between flex-wrap max-w-7xl mx-auto mt-5 text-start">
                             <div className="basis-[95%] mx-auto items-center border-b mb-3">
-                                <span className="mr-5 text-xl text-gray-400">작성자</span><input type="text" name="name" className=" text-gray-700 text-sm mb-2 mr-5 w-[90%] p-2 focus:outline-none"  />
+                                <span className="mr-5 text-xl text-gray-400">작성자</span><input type="text" name="name" className=" text-gray-700 text-sm mb-2 mr-5 w-[90%] p-2 focus:outline-none" value={results[0].username}/>
                             </div>
                             <div className="basis-[95%] items-center border-b mx-auto mb-3">
-                                <span className="mr-9 text-xl text-gray-400">제목</span><input type="text" name="title" className="text-sm mb-2 mr-5 p-2 w-[90%] focus:outline-none" />
+                                <span className="mr-9 text-xl text-gray-400">제목</span><input type="text" name="title" className="text-sm mb-2 mr-5 p-2 w-[90%] focus:outline-none" value={results[0].title} />
                             </div>
                             <div className="basis-[95%] mx-auto">
-                                <span className="mr-5 text-xl text-gray-400">내용</span><textarea name="content" className="text-gray-700 p-2 text-sm mb-2 border focus:outline-none w-full h-80 mt-3"></textarea>
+                                <span className="mr-5 text-xl text-gray-400">내용</span><textarea name="content" className="text-gray-700 p-2 text-sm mb-2 border focus:outline-none w-full h-80 mt-3" value={results[0].content}></textarea>
                             </div>
                         </div>
                         <div className="ml-[83.5%]">

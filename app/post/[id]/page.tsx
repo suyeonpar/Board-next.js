@@ -79,6 +79,15 @@ export default function Detail(){
                         {
                         session ? <Comment id={post && post[0]?.id} /> : <p className="block border p-4 text-center my-5 rounded-md"><Link href ="/login">로그인 이후 댓글을 작성할 수 있습니다.</Link></p>
                         }
+
+
+
+
+
+
+
+
+                        
                     </div>
                     </>
                 )
