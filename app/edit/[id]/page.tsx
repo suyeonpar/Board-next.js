@@ -75,7 +75,7 @@ export default async function Edit( props: editProps) {
                         </div>
                         <div className="ml-[83.5%]">
                             <Link href='/' className="bg-violet-300 text-white px-4 py-2.5 rounded shadow-md hover:bg-violet-400 focus:outline-none mr-5">취소</Link>
-                            <button className="bg-pink-200 text-white px-4 py-2 rounded shadow-md hover:bg-pink-300 focus:outline-none">수정하기</button>
+                            <button className="bg-pink-200 text-white px-4 py-2 rounded shadow-md hover:bg-pink-300 focus:outline-none" type='submit'>수정하기</button>
                         </div>
                     </form>
                 </div>
