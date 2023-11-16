@@ -54,18 +54,18 @@ export default function Comment(props: CommentProps){
         content: ''
     });
 
+    useEffect(()=>{
+        setFormData({
+            parentid: id,
+            userid: session?.user?.email ?? '',
+            username: session?.user?.name ?? '',
+            content: ''
+        })
+    },[session?.user.name, session?.user.email, id])
+
     const [totalcomment, setTotalComment] = useState<commentType[]>();
     const params = useParams();
     console.log(params)
-    
-    useEffect(()=>{
-        const fetchData = async ()=>{
-            const res = await fetch(`/api/comment?id=${params.id}`)
-            const data = await res.json();
-            setTotalComment(data.result);
-        }
-        fetchData();
-    },[params.id])
 
     const cmtSubmit = async () =>{
         try{
@@ -113,7 +113,7 @@ export default function Comment(props: CommentProps){
                             )
                         })
                     }
-                </div>
+                </div> 
                 <div className="">
                     <input name="content" type="text" className="border rounded p-2" onChange={commnetValue}></input>
                     <button className="bg-gray-800 hover:bg-black p-2 rounded-md text-white" onClick={cmtSubmit}>댓글 작성</button>
