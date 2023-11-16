@@ -71,7 +71,7 @@ export default function Write(){
                     <form method="post" onSubmit={submitEvent}>
                         <div className="flex justify-between flex-wrap max-w-7xl mx-auto mt-5 text-start">
                             <div className="basis-[95%] mx-auto items-center border-b mb-3">
-                                <span className="mr-5 text-2xl text-gray-400">작성자</span><input type="text" name="name" value={session && session.user.name} onChange={changeEvent} className=" text-gray-700 text-xl mb-2 mr-5 w-[90%] p-2 focus:outline-none" />
+                                <span className="mr-5 text-2xl text-gray-400">작성자</span><input type="text" name="name" value={session?.user.name} onChange={changeEvent} className=" text-gray-700 text-xl mb-2 mr-5 w-[90%] p-2 focus:outline-none" />
                             </div>
                             <div className="basis-[95%] items-center border-b mx-auto mb-3">
                                 <span className="mr-9 text-2xl text-gray-400">제목</span><input type="text" name="title" value={formData.title} onChange={changeEvent} className="text-xl mb-2 mr-5 p-2 w-[90%] focus:outline-none" />
