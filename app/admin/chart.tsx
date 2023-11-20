@@ -49,7 +49,7 @@ export default function ChartCom(){
     return(
         <>
         <div className='max-w-7xl mx-auto'>
-            <Bar width={400} height={200} data={data} options={options} className='mt-10' /> 
+            <Bar width={400} height={200} data={data}    className='mt-10' /> 
         </div>
         </>
     )
