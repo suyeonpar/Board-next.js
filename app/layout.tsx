@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Login from '@/components/login'
 import Link from 'next/link'
 import AuthSession from './session'
 import { redirect } from 'next/dist/server/api-utils'
+import Nav from '@/components/nav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthSession>
-          <Login />
+          <Nav />
           <div className='text-center mt-5 text-5xl'><Link href='/'>Sooo</Link></div>
           {children}
         </AuthSession>
