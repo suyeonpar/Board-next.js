@@ -105,8 +105,8 @@ export default function Comment(props: CommentProps){
         {
             session && session.user && 
             <>
-            <div className="max-w-7xl flex flex-wrap justify-between mx-auto border rounded-md relative mb-5">
-                <div className="mt-5 ml-5 basis-2/3">
+            <div className="max-w-7xl h-full flex flex-wrap justify-between mx-auto border rounded-md relative mb-5 items-center p-5">
+                <div className="ml-5 basis-2/3">
                 <p className="text-xl">댓글 목록</p>
                     {
                         totalcomment && totalcomment.map((e,i)=>{
@@ -130,7 +130,7 @@ export default function Comment(props: CommentProps){
                         })
                     }
                 </div> 
-                <div className="absolute bottom-2 right-2">
+                <div className="absolute bottom-3 right-2">
                     <input name="content" type="text" className="border rounded p-2 mr-2" onChange={commnetValue}></input>
                     <button className="bg-gray-800 hover:bg-black p-2 rounded-md text-white" onClick={cmtSubmit}>댓글 작성</button>
                 </div>

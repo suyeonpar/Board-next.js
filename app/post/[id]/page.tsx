@@ -54,12 +54,13 @@ params
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
+    const hours = (date.getHours()+9).toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const seconds = date.getSeconds().toString().padStart(2, "0");
-    const formaDate = `${year}-${month}-${day}-${minutes}-${seconds}`
+    const formaDate = `${year}-${month}-${day}-${hours}시${minutes}분${seconds}초`
     const [countResult] = await db.query<RowDataPacket[]>('select count (*) as cnt from board.view_log where postid = ? and ip_address = ?', [postId, userIp]);
     const totalCnt = countResult[0].cnt;
-    console.log(totalCnt+"개")
+   // console.log(totalCnt+"개")
 
     if(results.length > 0){
         if(totalCnt === 0){
