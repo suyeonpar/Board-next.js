@@ -16,6 +16,8 @@ data.id로 사용도 가능...
 import React, { useEffect, useState } from "react";
 import useCustomSession from "../app/sessions";
 import { useParams } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface CommentProps {
     id: number;
@@ -103,9 +105,9 @@ export default function Comment(props: CommentProps){
         {
             session && session.user && 
             <>
-            <div className="max-w-7xl flex flex-wrap justify-between mx-auto">
-                <div className="">
-                    <p>댓글 목록</p>
+            <div className="max-w-7xl flex flex-wrap justify-between mx-auto border rounded-md relative mb-5">
+                <div className="mt-5 ml-5 basis-2/3">
+                <p className="text-xl">댓글 목록</p>
                     {
                         totalcomment && totalcomment.map((e,i)=>{
                             const date = new Date(e.date)
@@ -118,15 +120,18 @@ export default function Comment(props: CommentProps){
                             const formaDate = `${year}-${month}-${day}-${hours}시${minutes}분${seconds}초`
                             return(
                                 <>
-                                    <p key={i}>{formaDate}</p>
-                                    <p>{e.content}</p>
+                                <div key={i} className="mb-5 mt-5 border-b">
+                                    <p className="text-xs mb-2"><FontAwesomeIcon icon={faUser} /> {e.username}</p>
+                                    <p className="text-base mb-2">{e.content}</p>
+                                    <p className="text-sm text-gray-400 mb-3">작성일 : {formaDate}</p>
+                                </div>
                                 </>
                             )
                         })
                     }
                 </div> 
-                <div className="">
-                    <input name="content" type="text" className="border rounded p-2" onChange={commnetValue}></input>
+                <div className="absolute bottom-2 right-2">
+                    <input name="content" type="text" className="border rounded p-2 mr-2" onChange={commnetValue}></input>
                     <button className="bg-gray-800 hover:bg-black p-2 rounded-md text-white" onClick={cmtSubmit}>댓글 작성</button>
                 </div>
             </div>

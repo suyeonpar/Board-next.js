@@ -74,11 +74,11 @@ params
 
     return(
         <>
-        <div className="w-full mx-auto">
+        <div className="w-full mx-auto h-auto">
             {
                 results.length > 0 && (
                     <>
-                    <div className="max-w-7xl border mx-auto mt-10 rounded-md flex flex-wrap justify-center">
+                    <div className="max-w-7xl h-auto border mx-auto mt-10 rounded-md flex flex-wrap justify-center relative">
                         <div className="border-b basis-[95%] py-2">
                         <span className="text-xl text-black">조회수: {post?.count}</span>
                             <p className="mb-5 text-end text-gray-500">작성일: {formaDate}</p>
@@ -87,17 +87,21 @@ params
                         <div className="border-b basis-[95%] py-2">
                             <p className="text-xl text-black"><span className="mr-6 text-2xl text-gray-300">제목: </span>{post?.title}</p>
                         </div>
-                        <div className="border-b basis-[95%] py-2">
+                        <div className="border-b basis-[95%] py-2 mb-14">
                             <p className="text-xl text-black"><span className="mr-6 text-2xl text-gray-300">내용: </span>{post?.content}</p>
                         </div>
-                        {
-                        session ? <Comment id={post?.id} /> : <p className="block border p-4 text-center my-5 rounded-md"><Link href ="/login">로그인 이후 댓글을 작성할 수 있습니다.</Link></p>
-                        }
-                        <EditDelete results={post as propsType['results']} />
+                        <div className='absolute bottom-2 right-2'>
+                            <EditDelete results={post as propsType['results']} />
+                        </div>
                     </div>
                     </>
                 )
             }
+            <div className='mt-5'>
+                {
+                session ? <Comment id={post?.id} /> : <p className="block border p-4 text-center my-5 rounded-md"><Link href ="/login">로그인 이후 댓글을 작성할 수 있습니다.</Link></p>
+                }
+            </div>
         </div>
         </>
     )
