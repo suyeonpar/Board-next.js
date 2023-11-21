@@ -7,6 +7,7 @@ interface formType {
     email: string;
     password: string;
     name: string;
+    birthday?: number;
 }
 
 export default function Register(){
@@ -14,7 +15,8 @@ export default function Register(){
     const [formData, setFormData] = useState<formType>({
         email: '',
         password: '',
-        name: ''
+        name: '',
+        birthday: 0
     });
 
     const [message, setMessage] = useState<string>("");
@@ -41,7 +43,7 @@ export default function Register(){
                 setMessage(data.message);
                 if (data.message === '성공') {
                     alert('회원가입이 완료되었습니다.');
-                    // window.location.href= '/';
+                    window.location.href= '/';
                     signIn('credentials', {
                         email: result.email,
                         password: result.password,
@@ -66,9 +68,10 @@ export default function Register(){
                     <input onChange={changeEvent} type="password" placeholder="비밀번호" name="password" required className="px-2 border border-l-pink-500 border-l-2 w-full focus:outline-gray-400 h-[50px] mx-auto mb-2" />
                     <p>닉네임</p>
                     <input onChange={changeEvent} type="text" placeholder="닉네임" name="name" required className="px-2 border border-l-pink-500 border-l-2 w-full focus:outline-gray-400 h-[50px] mx-auto" />
-                    <div className="mt-5 flex flex-wrap justify-between">
+                    <p>생일</p>
+                    <input onChange={changeEvent} type="text" placeholder="생일6자리" name="birthday" required className="px-2 border border-l-pink-500 border-l-2 w-full focus:outline-gray-400 h-[50px] mx-auto" />
+                    <div className="mt-5 flex flex-wrap justify-center">
                         <button type="submit" className="basis-[48%] px-6 py-2.5 bg-gray-800 text-white font-medium text-base mt-2 leading-tight uppercase rounded shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out">가입하기</button>
-                        <button className="button className='basis-[48%] px-6 py-2.5 bg-pink-400 text-white font-medium text-base mt-2 leading-tight uppercase rounded shadow-md hover:bg-pink-500 hover:shadow-lg focus:bg-pink-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-500 active:shadow-lg transition duration-150 ease-in-out"><Link href='/'>돌아가기</Link></button>
                     </div>
                 </form>
             </div>

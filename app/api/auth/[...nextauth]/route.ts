@@ -15,6 +15,7 @@ interface User {
     name: string;
     email: string;
     level: number;
+    birthday: number;
 }
 
 interface CustomSession extends Session {
@@ -44,7 +45,8 @@ export const authOptions : any = {
             name: "Credentials",
             credentials: {
                 email: {label: "email", type: "text"},
-                password: {label: "password", type: "password"}
+                password: {label: "password", type: "password"},
+                birthday: {label: "birthday", type: "birthday"}
             },
             // 로그인 요청시 실행되는 코드 디비와 비교 이후 맞으면 return user 정보를 보내고 틀리면 return null
             async authorize(credentials) : Promise< User | null >{
@@ -70,7 +72,8 @@ export const authOptions : any = {
                         id: userResult.id,
                         name: userResult.name,
                         email: userResult.email,
-                        level: userResult.level
+                        level: userResult.level,
+                        birthday: userResult.birthday
                     }
                     return user;
                 }catch(error){
@@ -95,7 +98,8 @@ export const authOptions : any = {
                 token.user = {
                     name : user.name,
                     email : user.email,
-                    level : user.level
+                    level : user.level,
+                    birthday: user.birthday
                 };
             }
             return token

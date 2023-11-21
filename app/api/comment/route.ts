@@ -36,15 +36,14 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
             const parentid = req.nextUrl.searchParams.get("id");
             console.log(parentid)
 
-            const [results] = await db.query<RowDataPacket[]>('select * from board.comment where parentid=?',[parentid]);
+            const [results] = await db.query<RowDataPacket[]>('select * from board.comment where parentid = ? order by date DESC', [parentid]);
 
-            return NextResponse.json({ message: '성공', result:results });
+            return NextResponse.json({ message: '성공', result : results });
 
         }catch(error){
             return NextResponse.json({ error: error });
         }
     }else{
         return NextResponse.json({ error: '정상적인 데이터가 아닙니다.' });
-    }
-    
+    }  
   }

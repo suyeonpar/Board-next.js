@@ -14,7 +14,7 @@ data.id로 사용도 가능...
 
 'use client';
 import React, { useEffect, useState } from "react";
-import useCustomSession from "./sessions";
+import useCustomSession from "../app/sessions";
 import { useParams } from "next/navigation";
 
 interface CommentProps {
@@ -47,6 +47,7 @@ export default function Comment(props: CommentProps){
     }
 
     const {data: session} = useCustomSession();
+
     const [formData, setFormData] = useState<formType>({
         parentid: id,
         userid: session?.user?.email ?? '',
@@ -63,9 +64,20 @@ export default function Comment(props: CommentProps){
         })
     },[session?.user.name, session?.user.email, id])
 
+
     const [totalcomment, setTotalComment] = useState<commentType[]>();
     const params = useParams();
     console.log(params)
+
+    useEffect(()=>{
+        const fetchData = async () =>{
+            const res = await fetch(`/api/comment?id=${params.id}`)    
+            const data = await res.json();
+            setTotalComment(data.result)
+        }   
+        fetchData()
+    },[params.id])
+
 
     const cmtSubmit = async () =>{
         try{
@@ -97,14 +109,13 @@ export default function Comment(props: CommentProps){
                     {
                         totalcomment && totalcomment.map((e,i)=>{
                             const date = new Date(e.date)
-                            //date.setTime(date.getTime()+(60*60*9*1000))
                             const year = date.getFullYear();
                             const month = (date.getMonth() + 1).toString().padStart(2, "0");
                             const day = date.getDate().toString().padStart(2, "0");
                             const hours = (date.getHours()+9).toString().padStart(2, "0");
                             const minutes = date.getMinutes().toString().padStart(2, "0");
                             const seconds = date.getSeconds().toString().padStart(2, "0");
-                            const formaDate = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`
+                            const formaDate = `${year}-${month}-${day}-${hours}시${minutes}분${seconds}초`
                             return(
                                 <>
                                     <p key={i}>{formaDate}</p>
