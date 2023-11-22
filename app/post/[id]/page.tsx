@@ -28,7 +28,7 @@ interface propsType {
 }
 
 async function Getip(){
-    const res = await fetch('https://board-next-js-dun.vercel.app');
+    const res = await fetch('https://board-next-js-dun.vercel.app/api/get-ip');
     const data  = res.json();
     if(!res.ok){
         alert("에러가 발생하였습니다.");
