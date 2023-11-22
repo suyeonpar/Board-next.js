@@ -48,7 +48,7 @@ export default function EditDelete({results} : propsType) {
                 (results && results && (session.user.email === results.userid || session.user.level === 10)) && (
                     <>
                     <div className="">
-                        <Link href={`/`}>
+                        <Link href={`/edit/${results.id}`}>
                             <button className='bg-pink-200 text-white mr-2 px-4 py-2 rounded shadow-md hover:bg-pink-300 focus:outline-none'>수정</button>
                         </Link>
                         <button className='bg-violet-300 text-white px-4 py-2 rounded shadow-md hover:bg-violet-400 focus:outline-none' onClick={()=>{deletePost(results && results?.id)}}>삭제</button>
