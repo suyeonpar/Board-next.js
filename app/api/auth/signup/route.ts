@@ -8,11 +8,35 @@ interface formType {
     password: string;
     name: string;
     birthday: number;
+    nickname? : string;
+    level?: number;
+    type?: string;
+    id?: number;
 }
 
 export const POST = async (req: NextRequest) : Promise<NextResponse> =>{
     if(req.method === "POST"){
-        const { email, password, name, birthday } : formType = JSON.parse(await req.text());
+
+        let { email, password, name, birthday, nickname, level, type, id } : formType = JSON.parse(await req.text());
+
+        level = level === undefined ? 2 : level;
+
+        if(type === 'edit'){
+
+            const [chkMember] = await db.query<RowDataPacket[]>('select password from board.member where email = ?', [email])
+
+            if(password === chkMember[0].password){
+
+                await db.query<RowDataPacket[]>('update board.member set email = ?, name = ?, nickname = ?, level = ? where id = ?', [email, name, nickname, level, id])
+
+            }else{
+
+                const hash =  await bcrypt.hash(password, 10);
+
+                await db.query<RowDataPacket[]>('update board.member set email = ?, password = ?, name = ?, nickname = ?, level = ? where id = ?', [email, password, name, nickname, level, id])
+            }
+            return NextResponse.json({message: "성공", data: name})
+        }
 
         if(!email || !password || !name || !birthday){
             return NextResponse.json({message: "데이터가 부족합니다."}) 

@@ -43,7 +43,7 @@ params
         params ? : {id?: number}
 }){
     const getIp = await Getip();
-    const userIp = getIp.data
+    const userIp = getIp.data.ip
     console.log(userIp)
     const postId = params?.id !== undefined ? params.id : 1;
     const [results] = await db.query<RowDataPacket[]>('select * from board.board where id = ?', [postId])
