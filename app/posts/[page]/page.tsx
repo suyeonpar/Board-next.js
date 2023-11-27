@@ -78,18 +78,20 @@ export default async function PostList({
       </div>
       <div className='flex justify-center gap-x-5 mb-5'>
         {
-        currentPage > 5 && <Link href={`/posts/${prevStart}`} className='bg-white border px-1.5 py-1 text-sm rounded text-black'>이전</Link>
+          currentPage > 5 && <Link href={`/posts/${prevStart}`} className='bg-white border px-1.5 py-1 text-sm rounded text-black'>이전</Link>
         }
         {
           Array(endPage - startPage + 1).fill(null).map((_,i)=>{
+
             const pageNumber = i + startPage;
+
             return(
-                <Link key={i} href={`/posts/${pageNumber}`} className='bg-white border px-1.5 py-1 text-sm rounded'>{pageNumber}</Link>
+              <Link key={i} href={`/posts/${pageNumber}`} className='bg-white border px-1.5 py-1 text-sm rounded'>{pageNumber}</Link>
             )
           })
         }
         {
-            nextStart <= lastPage && <Link href={`/posts/${nextStart}`} className='bg-white border px-1.5 py-1 text-sm rounded'>다음</Link>
+          nextStart <= lastPage && <Link href={`/posts/${nextStart}`} className='bg-white border px-1.5 py-1 text-sm rounded'>다음</Link>
         }
       </div>
       <Search />

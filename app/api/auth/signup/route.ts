@@ -7,7 +7,6 @@ interface formType {
     email: string;
     password: string;
     name: string;
-    birthday: number;
     nickname? : string;
     level?: number;
     type?: string;
@@ -17,8 +16,8 @@ interface formType {
 export const POST = async (req: NextRequest) : Promise<NextResponse> =>{
     if(req.method === "POST"){
 
-        let { email, password, name, birthday, nickname, level, type, id } : formType = JSON.parse(await req.text());
-
+        let { email, password, name, nickname, level, type, id } : formType = JSON.parse(await req.text());
+console.log(email, password, name, nickname, level, type, id)
         level = level === undefined ? 2 : level;
 
         if(type === 'edit'){
@@ -31,14 +30,14 @@ export const POST = async (req: NextRequest) : Promise<NextResponse> =>{
 
             }else{
 
-                const hash =  await bcrypt.hash(password, 10);
+               const hash =  await bcrypt.hash(password, 10);
 
                 await db.query<RowDataPacket[]>('update board.member set email = ?, password = ?, name = ?, nickname = ?, level = ? where id = ?', [email, password, name, nickname, level, id])
             }
             return NextResponse.json({message: "성공", data: name})
         }
 
-        if(!email || !password || !name || !birthday){
+        if(!email || !password || !name || !nickname){
             return NextResponse.json({message: "데이터가 부족합니다."}) 
         }
 
@@ -51,14 +50,16 @@ export const POST = async (req: NextRequest) : Promise<NextResponse> =>{
         if(memberCnt > 0){
             return NextResponse.json({message: "해당 이메일이 이미 존재합니다."})
         }else{
-            await db.query('insert into board.member (email, password, name, birthday) values(?,?,?,?)',[email, hash, name, birthday]);
+            await db.query('insert into board.member (email, password, name, nickname) values(?,?,?,?)',[email, hash, name, nickname]);
             const data = {
-                emial: email,
+                email: email,
                 password: password,
-                birthday: birthday
+                name: name,
+                nickname: nickname
             }
             return NextResponse.json({message: "성공", data: data})
         }
+        
         }else{
         return NextResponse.json({message: "실패"})
     }
