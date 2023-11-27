@@ -67,10 +67,11 @@ params
         await db.query<RowDataPacket[]>('update board.board set count = count + 1 where id = ?', [postId])
 
     }
-       await db.query<RowDataPacket[]>('insert into board.view_log (postid, ip_address, view_date) select ?, ?, NOW() where not exists (select 1 from board.view_log where postid = ? and ip_address = ? and view_date > now() - interval 24 hour)', [postId, userIp, postId, userIp])
+        await db.query<RowDataPacket[]>('insert into board.view_log (postid, ip_address, view_date) select ?, ?, NOW() where not exists (select 1 from board.view_log where postid = ? and ip_address = ? and view_date > now() - interval 24 hour)', [postId, userIp, postId, userIp]);
     // select 1 = 존재 여부를 확인하기 위해 사용 > 1이라는 건 상수 값으로 실제 데이터는 중요하지 않으며, 존재 여부를 확인하기 위함
     // 내가 원하는 데이터에서 어떠한 조건 즉 and 까지 포함한 3가지 조건이 모두 충족하는 조건을 찾는다.
     // 어떠한 행도 반환하지 않을 때만 참이 된다. 즉 3가지 조건이 모두 참일 때 혹은 데이터가 없을때 쿼리가 실행
+
     }
 
     return(
