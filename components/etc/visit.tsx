@@ -1,7 +1,10 @@
 'use client';
 import { useEffect } from "react";
 
-async function getData() {
+
+
+
+export default async function Visit(){
 
     useEffect(()=>{
         const fetchData = async () =>{
@@ -29,11 +32,6 @@ async function getData() {
         }
         fetchData();
     },[])
-
-}
-
-
-export default async function Visit(){
 
     //const resultData = await getData();
     //const data = resultData.data;
