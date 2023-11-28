@@ -5,6 +5,7 @@ import Link from 'next/link'
 import AuthSession from './session'
 import { redirect } from 'next/dist/server/api-utils'
 import Nav from '@/components/nav'
+import Visit from '@/components/etc/visit'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthSession>
+          <Visit />
           <Nav />
           <div className='text-center mt-5 text-5xl'><Link href='/'>Sooo</Link></div>
           {children}

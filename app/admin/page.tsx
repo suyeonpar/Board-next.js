@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import ChartCom from '../../components/admin/chart/chart';
+import TotalCount from '@/components/admin/chart/totalcnt';
 
 
 interface userInfo {
@@ -24,8 +25,9 @@ export default async function Admin(){
 
     return(
         <>
-        <p>관리자 전용 페이지 입니다.</p>
-        <ChartCom />
+        {/* <p>관리자 전용 페이지 입니다.</p>
+        <ChartCom /> */}
+        <TotalCount />
         </>
     )
 }
