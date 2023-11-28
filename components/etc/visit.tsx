@@ -33,12 +33,9 @@ async function getData() {
 }
 
 
-
-
-
 export default async function Visit(){
 
-    const resultData = await getData();
+    //const resultData = await getData();
     //const data = resultData.data;
 
     return(
