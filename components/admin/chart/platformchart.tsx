@@ -85,7 +85,7 @@ export default function FlatformCom(){
           
         }
       }catch(error){
-        console.log(error)
+        console.log(error) 
       }
     }
     fetchData();
@@ -106,9 +106,8 @@ export default function FlatformCom(){
     <div className="widget basis-full md:basis-[49.3%] w-[49.3%]">
      <div className="font-bold p-5 py-3 flex flex-wrap justify-between items-center">
         <div className="justify-end flex basis-full">
-          
-        <button onClick={()=>setDateType('today')} className='text-xs px-2 mr-4'>오늘</button>
-        <button onClick={()=>setDateType('yesterday')} className='text-xs px-2'>어제</button>
+          <button onClick={()=>setDateType('today')} className='text-xs px-2 mr-4'>오늘</button>
+          <button onClick={()=>setDateType('yesterday')} className='text-xs px-2'>어제</button>
         </div>
         <Line data={chartData} options={options}/>
       </div>
