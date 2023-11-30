@@ -3,8 +3,6 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Logout from '@/components/logout';
 import Link from 'next/link';
 import AdminNav from '@/components/admin/navbar/adminnav';
-import ChartCom from '@/components/admin/chart/chart';
-import AdminMember from './member/page';
 
 interface userInfo {
     user:{

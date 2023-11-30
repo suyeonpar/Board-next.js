@@ -1,5 +1,5 @@
 async function getData() {
-    const res =  await fetch('http://localhost:3000/api/admin', {
+    const res =  await fetch('https://board-next-js-dun.vercel.app/api/admin', {
         cache: 'no-cache',
         method: 'POST',
         headers: {
